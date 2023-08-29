@@ -9,7 +9,8 @@ use Illuminate\Support\Facades\Hash;
 
 class UsuarioController extends Controller
 {
-    public function store(UsuarioRequest $request){
+    public function store(UsuarioRequest $request)
+    {
         $usuario = Usuario::create([
             'nome' => $request->nome,
             'cpf' => $request->cpf,
@@ -23,5 +24,44 @@ class UsuarioController extends Controller
             "message" => "Usucario cadastrado",
             "data" => $usuario
         ], 200);
+    }
+    public function pesquisarPorId($id)
+    {
+        $usuario = Usuario::find($id);
+
+        if ($usuario == null) {
+            return response()->json([
+                'status' => false,
+                'message' => "Usuario não encontrada"
+            ]);
+        }
+
+        return response()->json([
+            'status' => true,
+            'data' => $usuario
+        ]);
+    }
+    public function pesquisarPorCpf($cpf)
+    {
+        $usuario = Usuario::where('cpf', '=', $cpf)->first();
+
+        if ($usuario == null) {
+            return response()->json([
+                'status' => false,
+                'message' => "Usuario não encontrada"
+            ]);
+
+            return response()->json([
+                'status' => true,
+                'data' => $usuario
+            ]);
+        }
+    }
+    public function retornarTodos(){
+        $usuario = Usuario::all();
+        return response()->json([
+            'status'=> true,
+            'data' => $usuario
+        ]);
     }
 }
