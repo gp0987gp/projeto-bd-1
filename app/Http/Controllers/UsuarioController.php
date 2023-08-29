@@ -57,11 +57,31 @@ class UsuarioController extends Controller
             ]);
         }
     }
-    public function retornarTodos(){
+    public function retornarTodos()
+    {
         $usuario = Usuario::all();
         return response()->json([
-            'status'=> true,
+            'status' => true,
             'data' => $usuario
+        ]);
+    }
+
+    public function pesquisaPorNome(Request $request)
+    {
+        $usuarios = Usuario::where('nome', 'like', '%' . $request->nome . '%')->get();
+
+        if (count($usuarios) > 0) {
+
+
+
+            return response()->json([
+                'status' => true,
+                'data' => $usuarios
+            ]);
+        }
+        return response()->json([
+            'status' => false,
+            'message' => 'Não há resultado para pesquisa.'
         ]);
     }
 }
