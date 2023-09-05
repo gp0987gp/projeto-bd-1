@@ -84,4 +84,54 @@ class UsuarioController extends Controller
             'message' => 'Não há resultado para pesquisa.'
         ]);
     }
+
+    public function excluir($id)
+    {
+        $usuario = Usuario::find($id);
+        if (!isset($usuario)) {
+            return response()->json([
+                'status' => false,
+                'message' => "Usuário não encontrado"
+            ]);
+        }
+
+        $usuario->delete();
+        return response()->json([
+            'status' => true,
+            'message' => "Usuário excluído com sucesso"
+        ]);
+    }
+
+    public function update(Request $request)
+    {
+        $usuario = Usuario::find($request->id);
+
+        if (!isset($usuario)) {
+            return response()->json([
+                'status' => false,
+                'message' => "Usuário não encontrado"
+            ]);
+        }
+        
+        if(isset($request->email)){
+        $usuario-> email = $request->email;
+        }
+        if(isset($request->nome)){
+        $usuario-> nome = $request->nome;
+        }
+        if(isset($request->cpf)){
+        $usuario-> cpf = $request->cpf;
+        }
+        if(isset($request->celular)){
+        $usuario-> celular = $request->celular;
+        }
+
+        $usuario->update();
+
+        return response()->json([
+            'status' => true,
+            'message' => "Usuário atualizado."
+        ]);
+        
+    }
 }
