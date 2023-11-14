@@ -7,7 +7,10 @@ use App\Models\Usuario;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Response;
+<<<<<<< HEAD
 use League\CommonMark\Delimiter\Delimiter;
+=======
+>>>>>>> 76b4a21d584509c823853d84cd334202ab596d68
 
 class UsuarioController extends Controller
 {
@@ -137,17 +140,31 @@ class UsuarioController extends Controller
         
         
     }
+<<<<<<< HEAD
     public function exportarCsv(){
         $usuarios = Usuario::all();
     
+=======
+
+    public function exportarCsv(){
+        $usuarios = Usuario::all();
+        
+>>>>>>> 76b4a21d584509c823853d84cd334202ab596d68
         $nomeArquivo = 'usuarios.csv';
 
         $filePath = storage_path('app/public/'. $nomeArquivo);
 
+<<<<<<< HEAD
         $handle = fopen ($filePath, 'w');
 
         fputcsv($handle, array('Nome', 'E-mail', 'CPF', 'Celular'), ';');
 
+=======
+        $handle = fopen($filePath, "w");
+
+        fputcsv($handle, array('Nome', 'E-mail', 'CPF', 'Celular'), ';');
+        
+>>>>>>> 76b4a21d584509c823853d84cd334202ab596d68
         foreach($usuarios as $u){
             fputcsv($handle, array(
                 $u->nome,
@@ -160,8 +177,12 @@ class UsuarioController extends Controller
         fclose($handle);
 
         return Response::download(public_path().'/storage/'.$nomeArquivo)->deleteFileAfterSend(true);
+<<<<<<< HEAD
 
 
             }
  
+=======
+    }
+>>>>>>> 76b4a21d584509c823853d84cd334202ab596d68
 }

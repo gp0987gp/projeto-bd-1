@@ -14,6 +14,7 @@ class UsuarioSeeder extends Seeder
      */
     public function run(): void
     {
+<<<<<<< HEAD
         for($i = 0; $i < 1314; $i++)
         Usuario::create([
             'nome' => 'trunks '.$i,
@@ -25,3 +26,16 @@ class UsuarioSeeder extends Seeder
 
     }
 };
+=======
+        for ($i = 0; $i < 100; $i++) {
+            Usuario::create([
+                'nome' => 'teste '.$i,
+                'cpf' => rand(00000000001, 99999999999),
+                'celular' => rand(18900000001, 18999999999),
+                'email' => 'teste@gmail.com '.$i,
+                'password' => Hash::make('123456'),
+            ]);
+        }
+    }
+}
+>>>>>>> 76b4a21d584509c823853d84cd334202ab596d68
